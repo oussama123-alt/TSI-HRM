@@ -14,12 +14,12 @@
         </li>
         <li>
           <a href="#">
-            <i class="zmdi zmdi-link"></i> Shortcuts
+            <i class="zmdi zmdi-link"></i>voir candidats
           </a>
         </li>
         <li>
-          <a href="#">
-            <i class="zmdi zmdi-widgets"></i> Overview
+          <a href="/resp_recrut/create">
+            <i class="zmdi zmdi-widgets"></i> créer candidats
           </a>
         </li>
         <li>

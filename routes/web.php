@@ -50,7 +50,14 @@ Route::any('/modifier',[
     'as' => 'modifier',
     'uses' => 'login_tabsController@postDataForm'
 ]) ;
-Route::get('/resp_recrut ','resp_recrutController@redirect');                  
+Route::get('/resp_recrut ','resp_recrutController@redirect');
+Route::get('/resp_recrut/create ',function () {
+    return view('resp_recrut.resp_recrut_create_candidat');
+});    
+Route::any('/create',[
+    'as' => 'create',
+    'uses' => 'resp_recrutController@postDataForm'
+]) ;                         
                         
 
 

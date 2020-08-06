@@ -15,7 +15,7 @@ class login_tabsController extends Controller
         $finnish_at1=$request->finnish_at1;
         $started_at2=$request->started_at2;
         $finish_at2=$request->finish_at2;
-       $log_id= $request->input('log_id');
+        $log_id= $request->input('log_id');
 
        $user_id = $request->input('user_id');
         $user_name = DB::table('users')->where([                  
