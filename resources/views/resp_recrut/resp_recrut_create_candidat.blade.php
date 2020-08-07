@@ -51,7 +51,7 @@
    
     <div class="container-fluid">
       
-        <form action="{{ action('resp_recrutController@postDataForm') }}" method="POST">
+        <form action="{{ action('resp_recrutController@postDataForm') }}" method="POST" enctype="multipart/form-data">
                   {!! csrf_field() !!}
                   <div class="form-group">
                     <label for="nom">nom:</label>
@@ -61,10 +61,14 @@
                     <label for="email">Email:</label>
                     <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
                   </div>
+                  <div class="form-group">
+                    <label for="phone">phone:</label>
+                    <input type="int" class="form-control" id="phone" placeholder="Enter phone number" name="phone">
+                  </div>
                   
                   <div class="form-group">
                     <label for="cv">cv:</label>
-                    <input type="file" id="cv" name="file" multiple><br><br>
+                    <input type="file" id="cv" name="file" ><br><br>
                   </div>
                   <button type="submit"  value="submit" class="btn btn-info">Submit</button>
                 </form>

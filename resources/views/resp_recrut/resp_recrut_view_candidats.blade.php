@@ -44,6 +44,38 @@
         </li>
       </ul>
     </div>
+    <div class="container">
+      <div class="row">
+        
+            
+            <div class="col-md-12">
+            <h4 style="margin-left: 15px ;font-size: 40px;">liste des candidats:</h4>
+            <div class="table-responsive">
+    
+                    
+        <table id="mytable" class="table table-bordred table-striped">
+                       
+       <thead>
+           
+            <th> Nom</th>
+            
+            <th>email</th>
+            <th>phone</th>
+            <th>cv</th>
+            
+            <th>Delete</th>
+        </thead>
+       <tbody>
+        @foreach($candidats as $candidat)
+        <tr>
+        <td>{{$candidat->name}}</td>
+        <td>{{$candidat->email}}</td>
+        <td>{{$candidat->phone}}</td>
+        <td><a href="{{url('/resp_recrut/'.$candidat->name.'/download')}} "><i class="fa fa-download" aria-hidden="true"></i></a></td>
+        <td><a href="{{url('/resp_recrut/'.$candidat->name)}}"><i class="fa fa-trash"></i></a></td>
+        </tr>
+        @endforeach
+      </tbody>
 
 
 

@@ -27,12 +27,12 @@ Route::get('/UserInterface', function () {
 
     return view('UserInterface', ['logs' => $logs , 'finish_at1' => $finish_at1, 'started_at2' => $started_at2]);
 });
-
-
 Auth::routes();
 Route::get('/pause', 'PauseController@stop');
 Route::get('/reprise', 'PauseController@back');
 Route::get('/home', 'HomeController@redirect')->name('home');
+
+
 Route::post('/AdminInterface/{user}/filterdate', [
     'as' => 'searchdate',
     'uses' => 'AdminController@searchdate']);
@@ -41,24 +41,28 @@ Route::get('/AdminInterface/{user}', 'AdminController@show')->name('Admin.show')
 Route::post('/AdminInterface/filter', [
     'as' => 'search',
     'uses' => 'AdminController@search']);
-
-    
-
-   
 Route::get('/AdminInterface','AdminController@redirect');
 Route::any('/modifier',[
     'as' => 'modifier',
     'uses' => 'login_tabsController@postDataForm'
 ]) ;
-Route::get('/resp_recrut ','resp_recrutController@redirect');
+
+ 
+
+Route::get('/resp_recrut','resp_recrutController@redirect');
 Route::get('/resp_recrut/create ',function () {
     return view('resp_recrut.resp_recrut_create_candidat');
-});    
+}); 
+  
+Route::any('/resp_recrut/{candidat}','resp_recrutController@delete');
+Route::any('/resp_recrut/{candidat}/download','resp_recrutController@download');
+
 Route::any('/create',[
     'as' => 'create',
     'uses' => 'resp_recrutController@postDataForm'
-]) ;                         
-                        
+]) ;            
+             
+              
 
 
 

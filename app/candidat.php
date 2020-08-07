@@ -15,7 +15,7 @@ class candidat extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'cv',
+        'name', 'email', 'cv', 'phone',
     ];
 
     /**
@@ -26,5 +26,8 @@ class candidat extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function getRouteKeyName(){
+        return 'name';
+    }
 
 }
