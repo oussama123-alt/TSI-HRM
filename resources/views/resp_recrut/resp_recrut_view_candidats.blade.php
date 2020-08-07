@@ -58,11 +58,9 @@
        <thead>
            
             <th> Nom</th>
-            
             <th>email</th>
             <th>phone</th>
             <th>cv</th>
-            
             <th>Delete</th>
         </thead>
        <tbody>
