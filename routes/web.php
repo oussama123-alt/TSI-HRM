@@ -48,10 +48,14 @@ Route::any('/modifier',[
 ]) ;
 
  
-
+Route::get('/resp_recrut/postes','resp_recrutController@redirect2'); 
 Route::get('/resp_recrut','resp_recrutController@redirect');
 Route::get('/resp_recrut/create ',function () {
-    return view('resp_recrut.resp_recrut_create_candidat');
+    $postes=DB::table('postes')->get();
+    return view('resp_recrut.resp_recrut_create_candidat',compact('postes'));
+}); 
+Route::get('/resp_recrut/createposte ',function () {
+    return view('resp_recrut.resp_recrut_create_poste');
 }); 
   
 Route::any('/resp_recrut/{candidat}','resp_recrutController@delete');
@@ -60,7 +64,12 @@ Route::any('/resp_recrut/{candidat}/download','resp_recrutController@download');
 Route::any('/create',[
     'as' => 'create',
     'uses' => 'resp_recrutController@postDataForm'
-]) ;            
+]) ;    
+Route::any('/createposte',[
+    'as' => 'createposte',
+    'uses' => 'resp_recrutController@createposte'
+]) ;        
+ 
              
               
 

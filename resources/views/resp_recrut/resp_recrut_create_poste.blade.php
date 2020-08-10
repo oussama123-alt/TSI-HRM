@@ -51,36 +51,22 @@
    
     <div class="container-fluid">
       
-        <form action="{{ action('resp_recrutController@postDataForm') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ action('resp_recrutController@createposte') }}" method="POST" enctype="multipart/form-data">
                   {!! csrf_field() !!}
                   <div class="form-group">
-                    <label for="nom">nom:</label>
-                    <input type="text" class="form-control" id="nom" placeholder="Enter password" name="nom">
+                    <label for="nom">nom de poste</label>
+                    <input type="text" class="form-control" id="nom" placeholder="nom de poste" name="nom">
                   </div>
                   <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                    <label for="discription">discription</label>
+                    <textarea type="text" class="form-control" id="discription" placeholder="discription de poste" name="discription"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="phone">phone:</label>
-                    <input type="int" class="form-control" id="phone" placeholder="Enter phone number" name="phone">
+                    <label for="nbr_postes">nombre de postes</label>
+                    <input type="int" class="form-control" id="nbr_postes" placeholder="nombre de postes" name="nbr_postes">
                   </div>
-                  <div class="form-group">
-                    <label for="role">poste:</label>
-                    <select  class="form-control" id="role"  name="role">
-                      @foreach ($postes as $poste)
-                    <option value="{{$poste->name}}">{{$poste->name}}</option>
-                      @endforeach
-                      
-                      
-                    </select>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="cv">cv:</label>
-                    <input type="file" id="cv" name="file" ><br><br>
-                  </div>
-                  <button type="submit"  value="submit" class="btn btn-info">Submit</button>
+                 
+                  <button type="submit"  value="submit" class="btn btn-info">créer</button>
                 </form>
               
      </div>

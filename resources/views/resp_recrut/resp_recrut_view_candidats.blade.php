@@ -7,13 +7,9 @@
         <a href="#"> bonjour </a>
       </header>
       <ul class="nav">
+        
         <li>
-          <a href="#">
-            <i class="zmdi zmdi-view-dashboard"></i> Dashboard
-          </a>
-        </li>
-        <li>
-          <a href="#">
+          <a href="/resp_recrut">
             <i class="zmdi zmdi-link"></i>voir candidats
           </a>
         </li>
@@ -23,13 +19,13 @@
           </a>
         </li>
         <li>
-          <a href="#">
-            <i class="zmdi zmdi-calendar"></i> Events
+          <a href="/resp_recrut/createposte">
+            <i class="zmdi zmdi-calendar"></i> creér poste
           </a>
         </li>
         <li>
-          <a href="#">
-            <i class="zmdi zmdi-info-outline"></i> About
+          <a href="/resp_recrut/postes">
+            <i class="zmdi zmdi-info-outline"></i> voir postes
           </a>
         </li>
         <li>
@@ -60,6 +56,7 @@
             <th> Nom</th>
             <th>email</th>
             <th>phone</th>
+            <th>poste</th>
             <th>cv</th>
             <th>Delete</th>
         </thead>
@@ -69,6 +66,8 @@
         <td>{{$candidat->name}}</td>
         <td>{{$candidat->email}}</td>
         <td>{{$candidat->phone}}</td>
+        <td>{{DB::table('postes')->where([                        
+          ['id', $candidat->poste_id], ])->get()->pluck('name')[0]}}</td>
         <td><a href="{{url('/resp_recrut/'.$candidat->name.'/download')}} "><i class="fa fa-download" aria-hidden="true"></i></a></td>
        <td> <a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash" ></i></a></td>
 

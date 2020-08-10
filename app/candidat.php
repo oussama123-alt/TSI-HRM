@@ -15,7 +15,7 @@ class candidat extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'cv', 'phone',
+        'name', 'email', 'cv', 'phone','poste_id'
     ];
 
     /**
@@ -28,6 +28,10 @@ class candidat extends Model
     ];
     public function getRouteKeyName(){
         return 'name';
+    }
+    public function poste()
+    {
+        return $this->belongsTo('App\poste');
     }
 
 }
