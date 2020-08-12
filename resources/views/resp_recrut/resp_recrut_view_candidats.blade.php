@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<div id="viewport">
     <div id="sidebar">
       <header>
         <a href="#"> bonjour </a>
@@ -28,24 +28,21 @@
             <i class="zmdi zmdi-info-outline"></i> voir postes
           </a>
         </li>
-        <li>
-          <a href="#">
-            <i class="zmdi zmdi-settings"></i> Services
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="zmdi zmdi-comment-more"></i> Contact
-          </a>
-        </li>
+       
       </ul>
     </div>
-    <div class="container">
-      <div class="row">
+    <div id="content">
+     
+      <div class="container-fluid">
         
-            
-            <div class="col-md-12">
-            <h4 style="margin-left: 15px ;font-size: 40px;">liste des candidats:</h4>
+        <span style="float:left ;padding-right:700px;"><h1>liste de candidats:</h1></span>
+            <div class="search-container">
+              <form method="POST" action="{{ url('/resp_recrut/filterCandidats')}}">
+                {{ csrf_field() }}
+                <input type="text" placeholder="recherche par nom" name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
             <div class="table-responsive">
     
                     
@@ -57,20 +54,40 @@
             <th>email</th>
             <th>phone</th>
             <th>poste</th>
+            <th>status</th>
             <th>cv</th>
             <th>Delete</th>
+            <th>accepter/refuser</th>
+            
         </thead>
        <tbody>
         @foreach($candidats as $candidat)
-        <tr>
+        <tr @if ($candidat->status =='refusé')       {{-- changé le couleur de ligne --}}
+        
+               style="background-color:rgb(212 49 71)" 
+             @elseif($candidat->status =='accepté')  
+              style="background-color:rgb(109 212 106)"
+             
+            @endif >
         <td>{{$candidat->name}}</td>
         <td>{{$candidat->email}}</td>
         <td>{{$candidat->phone}}</td>
-        <td>{{DB::table('postes')->where([                        
-          ['id', $candidat->poste_id], ])->get()->pluck('name')[0]}}</td>
-        <td><a href="{{url('/resp_recrut/'.$candidat->name.'/download')}} "><i class="fa fa-download" aria-hidden="true"></i></a></td>
-       <td> <a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash" ></i></a></td>
-
+        <td><a href="{{url('/resp_recrut/'.'postes/'.$candidat->poste_id)}}">{{DB::table('postes')->where([                        
+          ['id', $candidat->poste_id], ])->get()->pluck('name')[0]}}</a></td>
+          <td>{{$candidat->status}}</td>
+        <td><a href="{{url('/resp_recrut/'.$candidat->id.'/download')}} "><i class="fa fa-download" aria-hidden="true"></i></a></td>
+        <td> <a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash" ></i></a></td>
+        <td><a href="{{url('/accept/'.$candidat->id)}}"  @if ($candidat->status =='refusé')    {{-- changer l'icon  --}}     
+                                                                class="fa fa-check"
+                                                                >accepter</a></td>
+                                                           @elseif($candidat->status =='accepté')
+                                                               class="fa fa-ban"
+                                                               >refuser</a></td> 
+                                                            @else class="fa fa-check"
+                                                            >accepter</a></td> 
+                                                           @endif    
+                                                                                    
+     
         <!-- Modal pour confirmer la suppression -->                                              
         <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">
@@ -83,7 +100,7 @@
                 <p>confirmer la suppression.. </p>
               </div>
               <div class="modal-footer">
-                <a href="{{url('/resp_recrut/'.$candidat->name)}}"><i class="fa fa-trash">confirm</i></a>
+                <a href="{{url('/resp_recrut/'.$candidat->id)}}"><i class="fa fa-trash">confirm</i></a>
               </div>
             </div>
             
@@ -93,6 +110,9 @@
         </tr>
         @endforeach
       </tbody>
+    </div>
+  </div>
+</div>
 
 
 

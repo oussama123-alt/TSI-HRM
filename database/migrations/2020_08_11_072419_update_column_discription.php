@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnDiscriptionToPosteTable extends Migration
+class UpdateColumnDiscription extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,11 @@ class AddColumnDiscriptionToPosteTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::table('postes', function (Blueprint $table) {
-            $table->string('discription')->after('name');
-            
-        });
-    }
+{
+    Schema::table('postes', function (Blueprint $table) {
+        $table->text('discription')->change();
+    });
+}
 
     /**
      * Reverse the migrations.
@@ -26,9 +25,6 @@ class AddColumnDiscriptionToPosteTable extends Migration
      */
     public function down()
     {
-        Schema::table('postes', function (Blueprint $table) {
-            $table->dropCulomn('discription');
-            
-        });
+        //
     }
 }

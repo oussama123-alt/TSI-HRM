@@ -29,21 +29,7 @@
           <i class="zmdi zmdi-calendar"></i> voir postes
         </a>
       </li>
-      <li>
-        <a href="#">
-          <i class="zmdi zmdi-info-outline"></i> About
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="zmdi zmdi-settings"></i> Services
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="zmdi zmdi-comment-more"></i> Contact
-        </a>
-      </li>
+      
     </ul>
   </div>
   <!-- Content -->

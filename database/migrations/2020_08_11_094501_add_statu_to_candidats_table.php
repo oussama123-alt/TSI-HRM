@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnDiscriptionToPosteTable extends Migration
+class AddStatuToCandidatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddColumnDiscriptionToPosteTable extends Migration
      */
     public function up()
     {
-        Schema::table('postes', function (Blueprint $table) {
-            $table->string('discription')->after('name');
-            
+        Schema::table('candidats', function (Blueprint $table) {
+            $table->string('status')->default('pending')->after('cv');
         });
     }
 
@@ -26,9 +25,8 @@ class AddColumnDiscriptionToPosteTable extends Migration
      */
     public function down()
     {
-        Schema::table('postes', function (Blueprint $table) {
-            $table->dropCulomn('discription');
-            
+        Schema::table('candidats', function (Blueprint $table) {
+            $table->dropCulomn('status');
         });
     }
 }

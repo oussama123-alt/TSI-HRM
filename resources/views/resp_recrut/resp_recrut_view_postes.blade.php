@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<div id="viewport">
     <div id="sidebar">
       <header>
         <a href="#"> bonjour </a>
@@ -28,34 +28,34 @@
             <i class="zmdi zmdi-info-outline"></i> voir postes
           </a>
         </li>
-        <li>
-          <a href="#">
-            <i class="zmdi zmdi-settings"></i> Services
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="zmdi zmdi-comment-more"></i> Contact
-          </a>
-        </li>
+        
       </ul>
     </div>
-    <div class="container">
-      <div class="row">
+    <div id="content">
+     
+      <div class="container-fluid">
         
-            
-            <div class="col-md-12">
-            <h4 style="margin-left: 15px ;font-size: 40px;">liste des postes:</h4>
+        <span style="float:left ;padding-right:700px;"><h1>liste de postes:</h1></span>
+            <div class="search-container">
+              <form method="POST" action="{{ url('/resp_recrut/postes/filterPostes')}}">
+                {{ csrf_field() }}
+                <input type="text" placeholder="recherche par nom" name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
             <div class="table-responsive">
     
                     
-        <table id="mytable" class="table table-bordred table-striped">
+        <table id="mytable"  class="table table-bordred table-striped">
                        
        <thead>
            
             <th> Nom de poste</th>
-            <th>discription</th>
+            <th> date de creation</th>
             <th>nombre de postes</th>
+            <th>discription</th>
+            <th>details</th>
+            
             
            
         </thead>
@@ -63,12 +63,18 @@
         @foreach($postes as $poste)
         <tr>
         <td>{{$poste->name}}</td>
-        <td>{{$poste->discription}}</td>
+       
+        <td>{{$poste->created_at}}</td>
         <td>{{$poste->nbr_postes}}</td>
+        <td>{{substr($poste->discription, 0, 50).'...'}}</td>
+        <td><a href="{{url('/resp_recrut/'.'postes/'.$poste->id)}}" class="btn btn-xs btn-info pull-left" >details</a></td>
         
         </tr>
         @endforeach
-      </tbody>
+       </tbody>
+      </div>
+    </div>
+  </div>
 
 
 

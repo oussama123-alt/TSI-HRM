@@ -47,7 +47,14 @@ Route::any('/modifier',[
     'uses' => 'login_tabsController@postDataForm'
 ]) ;
 
- 
+
+Route::post('/resp_recrut/filterCandidats', [
+    'as' => 'search',
+    'uses' => 'resp_recrutController@filterCandidats']);
+Route::post('/resp_recrut/postes/filterPostes', [
+    'as' => 'search',
+    'uses' => 'resp_recrutController@filterPostes']);    
+Route::get('/resp_recrut/postes/{poste}','resp_recrutController@redirect3');
 Route::get('/resp_recrut/postes','resp_recrutController@redirect2'); 
 Route::get('/resp_recrut','resp_recrutController@redirect');
 Route::get('/resp_recrut/create ',function () {
@@ -60,6 +67,7 @@ Route::get('/resp_recrut/createposte ',function () {
   
 Route::any('/resp_recrut/{candidat}','resp_recrutController@delete');
 Route::any('/resp_recrut/{candidat}/download','resp_recrutController@download');
+Route::get('/accept/{candidat}', 'resp_recrutController@accept');
 
 Route::any('/create',[
     'as' => 'create',
@@ -68,7 +76,8 @@ Route::any('/create',[
 Route::any('/createposte',[
     'as' => 'createposte',
     'uses' => 'resp_recrutController@createposte'
-]) ;        
+]) ; 
+       
  
              
               

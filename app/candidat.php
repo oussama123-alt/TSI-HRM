@@ -27,7 +27,7 @@ class candidat extends Model
         'email_verified_at' => 'datetime',
     ];
     public function getRouteKeyName(){
-        return 'name';
+        return 'id';
     }
     public function poste()
     {

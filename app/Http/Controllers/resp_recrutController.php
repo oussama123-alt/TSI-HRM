@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\candidat;
+use App\poste;
 use Illuminate\Support\Facades\Storage;
 use DB;
 use  Illuminate\Http\UploadedFile;
@@ -54,11 +55,13 @@ class resp_recrutController extends Controller
     return view('resp_recrut.resp_recrut_view_candidats', compact('candidats'));
   }
 
+
     public function delete(candidat $candidat)
   {  
     $candidat->delete();
     return redirect ('/resp_recrut');
   }
+
 
   public function download(candidat $candidat)
   {  
@@ -73,7 +76,49 @@ class resp_recrutController extends Controller
     
     return view('resp_recrut.resp_recrut_view_postes', compact('postes'));
   }
+  function accept(candidat $candidat)    
+  {
+    
+    if($candidat->status =='refusé'){
+      DB::table('candidats')->where([['id',$candidat->id],])->update(['status' => 'accepté']);
+      return redirect ('/resp_recrut');
+    }
+    elseif($candidat->status=='pending'){
+      DB::table('candidats')->where([['id',$candidat->id],])->update(['status' => 'accepté']);
+    return redirect ('/resp_recrut');
+  }
+  elseif($candidat->status=='accepté'){
+    DB::table('candidats')->where([['id',$candidat->id],])->update(['status' => 'refusé']);
+    return redirect ('/resp_recrut');
+
+  }
+}
+
+
+function redirect3(poste $poste)    
+  {
+   $candidats=$poste->candidat;
+   
+    return view('resp_recrut.resp_recrut_view_details', ["poste"=>$poste , "candidats"=>$candidats]);
   
+  }
+  function filterCandidats(Request $request){
+    
+      $search=$request->search;
+      $candidats = DB::table('candidats')->where([                  
+          ['name', $search],])->get();
+          return view('resp_recrut.resp_recrut_view_candidats', compact('candidats'));
+}
+
+function filterPostes(Request $request){
+    
+  $search=$request->search;
+  $postes = DB::table('postes')->where([                  
+      ['name', $search],])->get();
+  return view('resp_recrut.resp_recrut_view_postes', compact('postes'));
+
+}
+
 
 
   

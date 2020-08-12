@@ -10,6 +10,10 @@ class poste extends Model
         'name','discription','nbr_postes','created_at'
     ];
 
+    public function getRouteKeyName(){
+        return 'id';
+    }
+
     public function candidat()
     {
         return $this->hasMany('App\candidat');
