@@ -14,17 +14,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+   
+    
+   
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
+    
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/UserInterface.css') }}" rel="stylesheet">
-    
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-select.css') }}">
 </head>
 <body>
     <div id="app">
@@ -83,13 +87,18 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    
 </body>
 <script>
+    
+
     document.querySelector("#start-time1").addEventListener("change", myFunction);
     document.querySelector("#end-time1").addEventListener("change", myFunction);
     document.querySelector("#start-time2").addEventListener("change", myFunction);
     document.querySelector("#end-time2").addEventListener("change", myFunction);
-
+ 
 function myFunction() {
   
   function split(time)
@@ -118,9 +127,90 @@ mid = Math.floor((end2-start2));
     
   
   $("#total-hours").val(totalHours); 
+  }
+ 
+ function myFunction2(elementid){
+      
+              var newdiv = document.createElement('div');
+             element =document.getElementById(elementid);
+              newdiv.innerHTML = " <br><select name=\"langue\" class=\"langue\" >\
+                       <option value=\"arabe\">arabe</option>\
+                        <option value=\"anglais\">anglais</option>\
+                        <option value=\"francais\">francais</option>\
+                        <option value=\"allemand\">allemand</option>\
+                        </select>\
+                        <select name=\"nivaux\" class=\"langue\">\
+                          <option value=\"maternelle\">maternelle</option>\
+                          <option value=\"courant\">courant</option>\
+                          <option value=\"intérmediaire\">intérmediaire</option>\
+                          <option value=\"debutant\">debutant</option>\
+                              </select>\
+                              <button style=\"float: none;\" type=\"button\"  onclick=\"myFunction5(this)\" class=\"close\" aria-label=\"Close\">\
+                          <span aria-hidden=\"true\">&times;</span>\
+                        </button>";
+                        element.appendChild(newdiv);
+   }
+
+   function replaceChar(origString, replaceChar, index) {
+    let firstPart = origString.substr(0, index);
+    let lastPart = origString.substr(index + 1);
+      
+    let newString = firstPart + replaceChar + lastPart;
+    return newString;
+}
+   
+   function myFunction3(){
+    
+    var selected = [];
+    for (var option of document.getElementsByClassName("langue")) {
+  
+        selected.push(option.value);
+      }
+    
+    var langg = selected.toString().split(",").join("|");; 
+    var indices = [];
+    
+    for(var i=0; i<langg.length;i++) {
+    if (langg[i] === "|") indices.push(i);
+    }
+
+    for(var i = 0; i < indices.length; i += 2) {
+       langg= replaceChar(langg,':', indices[i])
+       
+    }
+    
+    document.getElementById("lang").value = langg ;
+    
+   }
+
+   function myFunction4(){
+    document.getElementsByClassName('btn btn-info')[0].style.visibility ='visible';
+    document.getElementsByClassName('btn btn-cyan')[0].style.visibility ='hidden';
+   var original= document.getElementsByClassName('default');
+   var modifier= document.getElementsByClassName('modifier');
+   for (i = 0; i < original.length; i++) {
+   original[i].style.visibility ='hidden';
+   modifier[i].style.visibility ='visible';
+   }
+}
+
+function myFunction5(element) {
+    // Removes an element from the document
+  
+    element.parentNode.remove();
+}
+function myFunction6(element) {
+    // Removes an element from the document
+   
+    element.parentNode.remove();
+}
+   
+   
+
+
   
   
- }
+
  
   </script>
 </html>

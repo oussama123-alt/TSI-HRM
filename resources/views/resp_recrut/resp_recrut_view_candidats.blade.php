@@ -49,7 +49,6 @@
         <table id="mytable" class="table table-bordred table-striped">
                        
        <thead>
-           
             <th> Nom</th>
             <th>email</th>
             <th>phone</th>
@@ -58,23 +57,23 @@
             <th>cv</th>
             <th>Delete</th>
             <th>accepter/refuser</th>
-            
-        </thead>
+            <th>details</th>
+       </thead>
        <tbody>
         @foreach($candidats as $candidat)
-        <tr @if ($candidat->status =='refusé')       {{-- changé le couleur de ligne --}}
-        
-               style="background-color:rgb(212 49 71)" 
-             @elseif($candidat->status =='accepté')  
-              style="background-color:rgb(109 212 106)"
-             
-            @endif >
+        <tr  >
         <td>{{$candidat->name}}</td>
         <td>{{$candidat->email}}</td>
         <td>{{$candidat->phone}}</td>
         <td><a href="{{url('/resp_recrut/'.'postes/'.$candidat->poste_id)}}">{{DB::table('postes')->where([                        
           ['id', $candidat->poste_id], ])->get()->pluck('name')[0]}}</a></td>
-          <td>{{$candidat->status}}</td>
+          <td @if ($candidat->status =='refusé')              {{-- changer le couleur vers/rouge  --}} 
+        
+            style="background-color:rgb(212 49 71)" 
+          @elseif($candidat->status =='accepté')  
+           style="background-color:rgb(109 212 106)"
+          
+         @endif>{{$candidat->status}}</td>
         <td><a href="{{url('/resp_recrut/'.$candidat->id.'/download')}} "><i class="fa fa-download" aria-hidden="true"></i></a></td>
         <td> <a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash" ></i></a></td>
         <td><a href="{{url('/accept/'.$candidat->id)}}"  @if ($candidat->status =='refusé')    {{-- changer l'icon  --}}     
@@ -87,7 +86,7 @@
                                                             >accepter</a></td> 
                                                            @endif    
                                                                                     
-     
+        <td><a href="{{url('/resp_recrut/'.'candidats/'.$candidat->id)}}" class="btn btn-xs btn-info pull-left" >details</a></td>
         <!-- Modal pour confirmer la suppression -->                                              
         <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">

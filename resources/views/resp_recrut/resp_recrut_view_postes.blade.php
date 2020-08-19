@@ -53,6 +53,7 @@
             <th> Nom de poste</th>
             <th> date de creation</th>
             <th>nombre de postes</th>
+            <th>nombre de candidats</th>
             <th>discription</th>
             <th>details</th>
             
@@ -66,6 +67,7 @@
        
         <td>{{$poste->created_at}}</td>
         <td>{{$poste->nbr_postes}}</td>
+        <td>{{$poste->candidat->count()}}</td>
         <td>{{substr($poste->discription, 0, 50).'...'}}</td>
         <td><a href="{{url('/resp_recrut/'.'postes/'.$poste->id)}}" class="btn btn-xs btn-info pull-left" >details</a></td>
         

@@ -54,7 +54,7 @@
           <tr>
             <th scope="row">candidats pour cette poste</th>
            
-          <td colspan="2"> @foreach($candidats as $candidat)<a href="{{'/resp_recrut'}}">{{$candidat->name.'| '}}</a> @endforeach</td>
+          <td colspan="2"> @foreach($candidats as $candidat)<a href="{{url('/resp_recrut/'.'candidats/'.$candidat->id)}}">{{$candidat->name.'| '}}</a> @endforeach</td>
          
           </tr>
         </tbody>

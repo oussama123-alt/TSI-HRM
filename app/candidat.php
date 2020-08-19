@@ -31,7 +31,7 @@ class candidat extends Model
     }
     public function poste()
     {
-        return $this->belongsTo('App\poste');
+        return $this->belongsTo('App\poste' , 'id');
     }
 
 }
