@@ -90,19 +90,35 @@
            <div>
            <br><select name="langue" class="langue">
            <option value="{{substr($langue, 0, strpos($langue, ':'))}}">{{substr($langue, 0, strpos($langue, ':'))}}</option>
-            <option value="arabe">arabe</option>
-            <option value="anglais">anglais</option>
-            <option value="francais">francais</option>
-            <option value="allemand">allemand</option>
+           <option @if(substr($langue, 0, strpos($langue, ':')) =='arabe')
+            style="display: none" 
+            @endif value="arabe">arabe</option>
+            <option @if(substr($langue, 0, strpos($langue, ':'))=='anglais')
+            style="display: none" 
+            @endif value="anglais">anglais</option>
+            <option  @if(substr($langue, 0, strpos($langue, ':'))=='francais')
+            style="display: none" 
+            @endif value="francais">francais</option>
+            <option  @if(substr($langue, 0, strpos($langue, ':'))=='allemand')
+            style="display: none" 
+            @endif value="allemand">allemand</option>
             </select>
             <select name="nivaux" class="langue">
               <option value="{{substr($langue,strpos($langue, ':')+1,  )}}">{{substr($langue,strpos($langue, ':')+1,  )}}</option>
-              <option value="maternelle">maternelle</option>
-              <option value="courant">courant</option>
-              <option value="itérmediaire">intérmediaire</option>
-              <option value="debutant">debutant</option>
+              <option @if(substr($langue,strpos($langue, ':')+1,  )=='maternelle')
+              style="display: none" 
+              @endif value="maternelle">maternelle</option>
+              <option @if(substr($langue,strpos($langue, ':')+1,  )=='courant')
+              style="display: none" 
+              @endif value="courant">courant</option>
+              <option @if(substr($langue,strpos($langue, ':')+1,  )=='intérmediaire')
+              style="display: none" 
+              @endif value="itérmediaire">intérmediaire</option>
+              <option @if(substr($langue,strpos($langue, ':')+1,  )=='debutant')
+              style="display: none" 
+              @endif value="debutant">debutant</option>
             </select> 
-            <button style="float: none;" type="button" onclick="myFunction6(this)" class="close" aria-label="Close">
+            <button style="float: none;" type="button" onclick="myFunction5(this)" class="close" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>

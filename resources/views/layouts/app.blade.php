@@ -129,7 +129,7 @@ mid = Math.floor((end2-start2));
   $("#total-hours").val(totalHours); 
   }
  
- function myFunction2(elementid){
+ function myFunction2(elementid){             // ajouter une langue
       
               var newdiv = document.createElement('div');
              element =document.getElementById(elementid);
@@ -159,8 +159,8 @@ mid = Math.floor((end2-start2));
     return newString;
 }
    
-   function myFunction3(){
-    
+   function myFunction3(){           //regrouper les langues et le  nivaux  dans une chaine et 
+                                     // l'envoyer comme une valeur de input
     var selected = [];
     for (var option of document.getElementsByClassName("langue")) {
   
@@ -183,7 +183,7 @@ mid = Math.floor((end2-start2));
     
    }
 
-   function myFunction4(){
+   function myFunction4(){                // afficher les input aprés clicker sur le button 'modifier'
     document.getElementsByClassName('btn btn-info')[0].style.visibility ='visible';
     document.getElementsByClassName('btn btn-cyan')[0].style.visibility ='hidden';
    var original= document.getElementsByClassName('default');
@@ -195,15 +195,11 @@ mid = Math.floor((end2-start2));
 }
 
 function myFunction5(element) {
-    // Removes an element from the document
+    //supprimer une langue
   
     element.parentNode.remove();
 }
-function myFunction6(element) {
-    // Removes an element from the document
-   
-    element.parentNode.remove();
-}
+
    
    
 
