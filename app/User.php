@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','formation_id',
     ];
 
     /**
@@ -39,6 +39,15 @@ class User extends Authenticatable
     public function Login_tabs()
     {
         return $this->hasMany('App\Login_tabs');
+    }
+    public function formations()
+    { 
+        return $this->belongsToMany(formation::class);
+    }                                                   
+
+    public function formateur()
+    {
+        return $this->hasMany('App\formation','formateur_id');
     }
     /**
  * Get the route key for the model.

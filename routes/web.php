@@ -58,14 +58,26 @@ Route::get('/resp_recrut/postes/{poste}','resp_recrutController@redirect3');
 Route::get('/resp_recrut/candidats/{candidat}','resp_recrutController@redirect4');
 Route::get('/resp_recrut/postes','resp_recrutController@redirect2'); 
 Route::get('/resp_recrut','resp_recrutController@redirect');
-Route::get('/resp_recrut/create ',function () {
+Route::get('/resp_recrut/createCandidat ',function () {
     $postes=DB::table('postes')->get();
     return view('resp_recrut.resp_recrut_create_candidat',compact('postes'));
 }); 
+Route::get('/resp_recrut/createFormation ',function () {
+    $users=DB::table('users')->get();
+    return view('resp_recrut.resp_recrut_create_formation',compact('users'));
+}); 
+Route::post('/createFormation',[
+    'as' => 'createFormation',
+    'uses' => 'resp_recrutController@createFormation'
+]) ; 
+
 Route::get('/resp_recrut/createposte ',function () {
     return view('resp_recrut.resp_recrut_create_poste');
 }); 
-  
+Route::get('/resp_recrut/formations','resp_recrutController@viewFormation');
+
+Route::any('/resp_recrut/formations/delete/{formation}','resp_recrutController@deleteFormation');
+Route::any('/resp_recrut/formations/{formation}','resp_recrutController@formationDetails');
 Route::any('/resp_recrut/{candidat}','resp_recrutController@delete');
 Route::any('/resp_recrut/{candidat}/download','resp_recrutController@download');
 Route::get('/accept/{candidat}', 'resp_recrutController@accept');
@@ -74,9 +86,14 @@ Route::post('/create',[
     'as' => 'create',
     'uses' => 'resp_recrutController@postDataForm'
 ]) ; 
+
 Route::post('/modifiierCandidat',[
     'as' => 'modifier',
     'uses' => 'resp_recrutController@modifierCandidat'
+]) ; 
+Route::post('/modifierFormation',[
+    'as' => 'formation',
+    'uses' => 'resp_recrutController@modifierFormation'
 ]) ;     
 Route::any('/createposte',[
     'as' => 'createposte',

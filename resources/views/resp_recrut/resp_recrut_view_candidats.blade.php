@@ -1,36 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="viewport">
-    <div id="sidebar">
-      <header>
-        <a href="#"> bonjour </a>
-      </header>
-      <ul class="nav">
-        
-        <li>
-          <a href="/resp_recrut">
-            <i class="zmdi zmdi-link"></i>voir candidats
-          </a>
-        </li>
-        <li>
-          <a href="/resp_recrut/create">
-            <i class="zmdi zmdi-widgets"></i> créer candidats
-          </a>
-        </li>
-        <li>
-          <a href="/resp_recrut/createposte">
-            <i class="zmdi zmdi-calendar"></i> creér poste
-          </a>
-        </li>
-        <li>
-          <a href="/resp_recrut/postes">
-            <i class="zmdi zmdi-info-outline"></i> voir postes
-          </a>
-        </li>
-       
-      </ul>
-    </div>
+
     <div id="content">
      
       <div class="container-fluid">
@@ -75,7 +46,7 @@
           
          @endif>{{$candidat->status}}</td>
         <td><a href="{{url('/resp_recrut/'.$candidat->id.'/download')}} "><i class="fa fa-download" aria-hidden="true"></i></a></td>
-        <td> <a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash" ></i></a></td>
+        <td> <a href="" data-toggle="modal" data-target="#{{$candidat->name}}"><i class="fa fa-trash" ></i></a></td>
         <td><a href="{{url('/accept/'.$candidat->id)}}"  @if ($candidat->status =='refusé')    {{-- changer l'icon  --}}     
                                                                 class="fa fa-check"
                                                                 >accepter</a></td>
@@ -88,7 +59,7 @@
                                                                                     
         <td><a href="{{url('/resp_recrut/'.'candidats/'.$candidat->id)}}" class="btn btn-xs btn-info pull-left" >details</a></td>
         <!-- Modal pour confirmer la suppression -->                                              
-        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal fade" id="{{$candidat->name}}" role="dialog">
           <div class="modal-dialog">
           
             <!-- Modal content-->
@@ -96,7 +67,7 @@
              
               <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <p>confirmer la suppression.. </p>
+                <p>confirmer la suppression  de candidat {{$candidat->name}} </p>
               </div>
               <div class="modal-footer">
                 <a href="{{url('/resp_recrut/'.$candidat->id)}}"><i class="fa fa-trash">confirm</i></a>

@@ -3,36 +3,7 @@
 @section('content')
 
 
-<div id="viewport">
-  <!-- Sidebar -->
-  <div id="sidebar">
-    <header>
-      <a href="#"> bonjour </a>
-    </header>
-    <ul class="nav">
-      <li>
-        <a href="/resp_recrut">
-          <i class="zmdi zmdi-view-dashboard"></i> voir candidats
-        </a>
-      </li>
-      <li>
-        <a href="/resp_recrut/create">
-          <i class="zmdi zmdi-link"></i> créer candidat
-        </a>
-      </li>
-      <li>
-        <a href="/resp_recrut/createposte">
-          <i class="zmdi zmdi-widgets"></i> créer poste
-        </a>
-      </li>
-      <li>
-        <a href="/resp_recrut/postes">
-          <i class="zmdi zmdi-calendar"></i> voir postes
-        </a>
-      </li>
-      
-    </ul>
-  </div>
+
   <!-- Content -->
   <div id="content">
    
@@ -84,17 +55,15 @@
                     <div id="dynamicInput">
                      <div>
                       <br><select name="langue"  class="langue">
-                        <option value="arabe">arabe</option>
-                        <option value="anglais">anglais</option>
-                        <option value="francais">francais</option>
-                        <option value="allemand">allemand</option>
+                        @foreach (Config::get('enums.langue' )  as $langue)
+                        <option value="{{$langue}}">{{$langue}}</option>
+                        @endforeach                                              
                         </select>
                         <select name="nivaux" class="langue">
-                          <option value="maternelle">maternelle</option>
-                          <option value="courant">courant</option>
-                          <option value="itérmediaire">intérmediaire</option>
-                          <option value="debutant">debutant</option>
-                        </select>
+                          @foreach (Config::get('enums.niveau' )  as $niveau)
+                          <option value="{{$niveau}}">{{$niveau}}</option>
+                          @endforeach 
+                        </select>                       
                        <button style="float: none;" type="button" onclick="myFunction5(this)" class="close" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -125,7 +94,7 @@
                 
      </div>
   </div>
-</div>
+
  
 
 

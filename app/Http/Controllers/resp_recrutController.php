@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\candidat;
 use App\poste;
+use App\User;
+use App\formation;
 use Illuminate\Support\Facades\Storage;
 use DB;
 use  Illuminate\Http\UploadedFile;
@@ -13,7 +15,7 @@ use Carbon\Carbon;
 class resp_recrutController extends Controller
 {
  
-     public function postDataForm(Request $request)
+     public function postDataForm(Request $request)      //crée un candidat
     {   
         $name=$request->nom;
         $email=$request->email;
@@ -44,7 +46,7 @@ class resp_recrutController extends Controller
     }
 
 
-    public function createposte(Request $request)
+    public function createposte(Request $request)    //crée u  poste et redirect vers le page view postes
   {  
     $name=$request->nom;
     $discription=$request->discription;
@@ -58,7 +60,7 @@ class resp_recrutController extends Controller
 
 
 
-    function redirect(Request $request)    
+    function redirect(Request $request)    //redirect  vers le page view candidats
   {
     $candidats = DB::table('candidats')->get();
     
@@ -66,27 +68,26 @@ class resp_recrutController extends Controller
   }
 
 
-    public function delete(candidat $candidat)
+    public function delete(candidat $candidat)       //fonction pour supprimer un candidat
   {  
     $candidat->delete();
     return redirect ('/resp_recrut');
   }
 
 
-  public function download(candidat $candidat)
+  public function download(candidat $candidat)     //fonction pour telecharger le cv
   {  
      $cvname=$candidat->cv;
 
      return response()->download(storage_path("app/public/cv/".$cvname));
     
   }
-  function redirect2(Request $request)    
+  function redirect2(Request $request)    //redirect vers le page view postes
   {
-    
     $postes = poste::all();
     return view('resp_recrut.resp_recrut_view_postes', compact('postes'));
   }
-  function accept(candidat $candidat)    
+  function accept(candidat $candidat)     //accepter ou refuser une candidat         
   {
     
     if($candidat->status =='refusé'){
@@ -105,7 +106,7 @@ class resp_recrutController extends Controller
 }
 
 
-function redirect3(poste $poste)    
+function redirect3(poste $poste)          //redirect vers le page de details
   {
    $candidats=$poste->candidat;
    
@@ -113,7 +114,7 @@ function redirect3(poste $poste)
   
   }
 
-  function filterCandidats(Request $request){
+  function filterCandidats(Request $request){     //function de recherche dans le page view candidats
     
       $search=$request->search;
       $candidats = DB::table('candidats')->where([                  
@@ -121,7 +122,7 @@ function redirect3(poste $poste)
           return view('resp_recrut.resp_recrut_view_candidats', compact('candidats'));
 }
 
-function filterPostes(Request $request){
+function filterPostes(Request $request){        //function de recherche dans le page view postes
     
   $search=$request->search;
   $postes = DB::table('postes')->where([                  
@@ -130,7 +131,7 @@ function filterPostes(Request $request){
 
 }
 
-function redirect4(candidat $candidat)    
+function redirect4(candidat $candidat)     //redirect vers le page view candidats details
   {
    $candidats= $candidat;
    
@@ -138,7 +139,7 @@ function redirect4(candidat $candidat)
   
   }
 
-  function modifierCandidat(Request $request){
+  function modifierCandidat(Request $request){  //modifer le candidat et redirect
        
         $id=$request->id;
         $candidat=  candidat::find($id);
@@ -180,10 +181,75 @@ function redirect4(candidat $candidat)
           $candidat->save(); 
 
        return redirect ('/resp_recrut');
-
   }
 
+   public function createFormation(Request $request)   //crée une formation et redirect vers la page ...
+  {  
+    $formation = new formation ;
+    $formation->name= $request->name;
+    $formation->contenu=$request->contenu;
+    $formation->debut=$request->debut ;
+    $formation->fin=$request->fin;
+    $formation->formateur_id = DB::table('users')->where([['name', $request->formateur],])->pluck('id')->first();
+    $formation->created_at = carbon::now();
+    $formation->save();
+    $participants= explode(',',$request->particip[0]);
+    foreach($participants as $participant){
+     $formation->participants()->sync(User::where('name', $participant)->get());
+       }
+return redirect('/resp_recrut/formations');
+  }
 
+public function viewFormation(Request $request){   //redirect ver page view formations
+$formations= formation::all();
+return view('resp_recrut.resp_recrut_view_formations', [ "formations"=>$formations]);
+ }
 
+ public function deleteFormation(formation $formation)       //fonction pour supprimer un formation
+  {  
+    $formation->delete();
+    DB::table('formation_user')->where([['formation_id', $formation->id],])->delete();
+    return redirect ('/resp_recrut/formations');
+  }
   
+  public function formationDetails(formation $formation){
+  return view('resp_recrut.resp_recrut_view_formations_details', [ "formation"=>$formation]);
+  }
+
+  public function modifierFormation(Request $request){
+    $id=$request->id;
+    $formation=  formation::find($id);
+
+    if(!empty($request->nom)) {
+      $formation->name = $request->nom;
+    }
+    if(!empty($request->contenu)) {
+      $formation->contenu = $request->contenu;
+    }
+    if(!empty($request->formateur)) {
+      $formation->formateur_id = DB::table('users')->where([['name', $request->formateur],])->pluck('id')->first();
+    }
+    if(!empty($request->debut)) {
+      $formation->debut = $request->debut;
+    }
+    if(!empty($request->fin)) {
+      $formation->debut = $request->fin;
+    }
+    
+      
+      $participants= explode(',',$request->particip[0]);
+      $formation->participants()->detach();
+      
+      foreach($participants as $participant){
+       $formation->participants()->attach(User::where('name', $participant)->get());
+         }
+      
+      
+      $formation->save();  
+      return view('resp_recrut.resp_recrut_view_formations_details', [ "formation"=>$formation]);
+
+  }
+   
+
+
 }

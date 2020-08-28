@@ -2,36 +2,7 @@
 
 @section('content')
 
-<div id="viewport">
-  <!-- Sidebar -->
-  <div id="sidebar">
-    <header>
-      <a href="#"> bonjour </a>
-    </header>
-    <ul class="nav">
-      <li>
-        <a href="/resp_recrut">
-          <i class="zmdi zmdi-view-dashboard"></i> voir candidats
-        </a>
-      </li>
-      <li>
-        <a href="/resp_recrut/create">
-          <i class="zmdi zmdi-link"></i> créer candidat
-        </a>
-      </li>
-      <li>
-        <a href="/resp_recrut/createposte">
-          <i class="zmdi zmdi-widgets"></i> créer poste
-        </a>
-      </li>
-      <li>
-        <a href="/resp_recrut/postes">
-          <i class="zmdi zmdi-calendar"></i> voir postes
-        </a>
-      </li>
-      
-    </ul>
-  </div>
+
   <!-- Content -->
   <div id="content">
    
@@ -57,7 +28,7 @@
               
      </div>
   </div>
-</div>
+
 
 
 @endsection

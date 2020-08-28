@@ -49895,3 +49895,103 @@ module.exports = __webpack_require__(/*! C:\xampp\php\TSI-HRM-1\resources\sass\a
 /***/ })
 
 /******/ });
+
+function myFunction() {
+  
+  function split(time)
+  {
+    var t = time.split(":");
+    return parseInt((t[0] * 60), 10) + parseInt(t[1], 10); //convert to minutes and add minutes
+    
+  }
+
+  //value start1
+  var start1 = split($("input#start-time1").val()); //format HH:MM
+  //value start2
+  var start2 =split($("input#start-time2").val()); //format HH:MM
+  
+  //value end
+  var end1 = split($("input#end-time1").val()); //format HH:MM
+  //value end
+  var end2 = split($("input#end-time2").val()); //format HH:MM
+  
+  totalHours = NaN;
+  
+   morn =  Math.floor((end1-start1));
+mid = Math.floor((end2-start2));
+    
+    totalHours =parseFloat((mid+morn)/60).toFixed(1); 
+    
+  
+  $("#total-hours").val(totalHours); 
+  }
+ 
+ 
+
+  function replaceChar(origString, replaceChar, index) {
+    let firstPart = origString.substr(0, index);
+    let lastPart = origString.substr(index + 1);
+      
+    let newString = firstPart + replaceChar + lastPart;
+    return newString;
+}
+   
+   function myFunction3(){           //regrouper les langues et le  nivaux  dans une chaine et 
+                                     // l'envoyer comme une valeur de input
+    var selected = [];
+    for (var option of document.getElementsByClassName("langue")) {
+  
+        selected.push(option.value);
+      }
+    
+    var langg = selected.toString().split(",").join("|");; 
+    var indices = [];
+    
+    for(var i=0; i<langg.length;i++) {
+    if (langg[i] === "|") indices.push(i);
+    }
+
+    for(var i = 0; i < indices.length; i += 2) {
+       langg= replaceChar(langg,':', indices[i])
+       
+    }
+    
+    document.getElementById("lang").value = langg ;
+    
+   }
+
+   function myFunction4(){                // afficher les input aprés clicker sur le button 'modifier'
+    document.getElementsByClassName('btn btn-info')[0].style.visibility ='visible';
+    document.getElementsByClassName('btn btn-cyan')[0].style.visibility ='hidden';
+   var original= document.getElementsByClassName('default');
+   var modifier= document.getElementsByClassName('modifier');
+   for (i = 0; i < original.length; i++) {
+   original[i].style.visibility ='hidden';
+   modifier[i].style.visibility ='visible';
+   }
+}
+
+function myFunction5(element) {
+    //supprimer une langue
+     
+    element.parentNode.remove();
+}
+
+ function myFunction7(){           //regrouper les langues et le  nivaux  dans une chaine et 
+                                   // l'envoyer comme une valeur de input
+    var selected = [];
+    for (var option of document.getElementsByClassName("participants")) {
+  
+        selected.push(option.value);
+      }
+    
+    document.getElementById("particip").value = selected ;
+    
+ }
+
+   
+   
+
+
+  
+  

@@ -13,7 +13,7 @@ class AddColumnUserId extends Migration
      */
     public function up()
     {
-        Schema::table('Login_tabs', function (Blueprint $table) {
+        Schema::table('login_tabs', function (Blueprint $table) {
             //
             $table->unsignedBigInteger('user_id')->nullable()->after('id');
 
@@ -28,7 +28,7 @@ class AddColumnUserId extends Migration
      */
     public function down()
     {
-        Schema::table('Login_tabs', function (Blueprint $table) {
+        Schema::table('ogin_tabs', function (Blueprint $table) {
             //
             $table->dropForeign(['user_id']);
             $table->dropCulomn('user_id');

@@ -41,10 +41,13 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+
                     </ul>
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -80,45 +83,51 @@
                 </div>
             </div>
         </nav>
+
         <main class="py-4">
             <div id="viewport">
                 <div id="sidebar">
-                  <header>
-                    <a href="#"> bonjour </a>
-                  </header>
-                  <ul class="nav">                   
-                    <li>
-                      <a href="/resp_recrut">
-                        <i class="zmdi zmdi-link"></i>voir candidats
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/resp_recrut/createCandidat">
-                        <i class="zmdi zmdi-widgets"></i> créer candidats
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/resp_recrut/createposte">
-                        <i class="zmdi zmdi-calendar"></i> creér poste
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/resp_recrut/postes">
-                        <i class="zmdi zmdi-info-outline"></i> voir postes
-                      </a>
-                    </li>
-                    <li>
-                        <a href="/resp_recrut/createFormation">
-                          <i class="zmdi zmdi-info-outline"></i> créer formation
+                    <header>
+                      <a href="#"> bonjour </a>
+                    </header>
+                    <ul class="nav">
+                      <li>
+                        <a href="#">
+                          <i class="zmdi zmdi-view-dashboard"></i> Dashboard
                         </a>
                       </li>
-                     <li>
-                        <a href="/resp_recrut/formations">
-                          <i class="zmdi zmdi-info-outline"></i> voir formations
+                      <li>
+                        <a href="#">
+                          <i class="zmdi zmdi-link"></i> Shortcuts
                         </a>
-                    </li>                    
-                  </ul>
-                </div>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="zmdi zmdi-widgets"></i> Overview
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="zmdi zmdi-calendar"></i> Events
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="zmdi zmdi-info-outline"></i> About
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="zmdi zmdi-settings"></i> Services
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="zmdi zmdi-comment-more"></i> Contact
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
             @yield('content')
             </div>
         </main>
@@ -129,6 +138,7 @@
 </body>
 <script>
     
+
     document.querySelector("#start-time1").addEventListener("change", myFunction);
     document.querySelector("#end-time1").addEventListener("change", myFunction);
     document.querySelector("#start-time2").addEventListener("change", myFunction);
@@ -152,42 +162,7 @@
         element.appendChild(newdiv);
 }
 
-function myFunction2(elementid){             // ajouter une langue
-             var newdiv = document.createElement('div');
-             element =document.getElementById(elementid);
-                                
-            newdiv.innerHTML = '<br><select name="langue" class="langue" >\
-                           @foreach (Config::get('enums.langue')  as $langue)\
-                              <option value="{{$langue}}">{{$langue}}</option>\
-                           @endforeach\
-                         </select>\
-                        <select name="nivaux" class="langue">\
-                        @foreach (Config::get('enums.niveau' )  as $niveau)\
-                        <option value="{{$niveau}}">{{$niveau}}</option>\
-                        @endforeach\
-                        </select>\
-                        <button style="float: none;" type="button"  onclick="myFunction5(this)" class="close" aria-label="Close">\
-                          <span aria-hidden=\"true\">&times;</span>\
-                        </button>';
-           element.appendChild(newdiv);
-           const selected=[]
-           var select=Array.from(document.getElementsByName("langue"));
-           for (var i = 0; i < select.length; i++) {
-           selected.push(select[i].options[select[i].selectedIndex].value)
-           }        
-           alert(selected);
-          for (var k = 0; k < select.length; k++) {
-           for (var j = 1; j < select[k].options.length; j++) {
-            if (selected.includes(select[k].options[j].value) && select[k].options[j].value!=select[k].options[select[k].selectedIndex].value ) {
-              select[k].removeChild(select[k].options[j]);
 
-            }
-        }
-      }
-                    
- }
  
-   
-   
   </script>
 </html>
